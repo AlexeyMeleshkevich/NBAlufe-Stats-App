@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import Foundation
 
 class MainViewController: UIViewController {
@@ -17,15 +16,26 @@ class MainViewController: UIViewController {
     
     let button = UIButton(type: .roundedRect)
     
-    let networker = NetworkingService()
+//    let requestFields = RequestParams(url: "https://api-nba-v1.p.rapidapi.com/games/seasonYear/2020-02-14",
+//                                      headers: ["x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+//                                                "x-rapidapi-key": "d3f4042bc4msh3e8baa6aaf0e778p15af52jsn260491400f82"])
     
-    let url = "https://api-basketball.p.rapidapi.com/games"
+    let networker = NetworkingService(url: "https://api-nba-v1.p.rapidapi.com/games/seasonYear/2020-02-14",
+                                      headers: ["x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                                                "x-rapidapi-key": "d3f4042bc4msh3e8baa6aaf0e778p15af52jsn260491400f82"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
+        
+        }
+    
+    
+    
+    fileprivate func setUI() {
         setNavBar()
         setGetButton(getButton: button)
-        }
+    }
     
     
     func setNavBar() {
@@ -60,7 +70,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func getButtonPressed() {
-        networker.request(url: url)
+        networker.requestData()
     }
 }
 

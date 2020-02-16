@@ -3,15 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C55BD03178B4BDB62BC7649 /* Pods_NBAlufe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93618630994C3AF4D2053609 /* Pods_NBAlufe.framework */; };
 		A603D37423E489C400FD4B27 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A603D37323E489C300FD4B27 /* NetworkingService.swift */; };
 		A61F358323E316A50026D146 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358223E316A50026D146 /* CustomTableViewCell.swift */; };
 		A61F358523E31F850026D146 /* MainViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358423E31F850026D146 /* MainViewControllerExtension.swift */; };
-		A61F358723E322060026D146 /* matchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358623E322060026D146 /* matchModel.swift */; };
+		A61F358723E322060026D146 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358623E322060026D146 /* MatchModel.swift */; };
 		A61F358923E32F510026D146 /* MatchReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358823E32F510026D146 /* MatchReviewController.swift */; };
 		A6BB45D423E2FE3600A1B5E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */; };
 		A6BB45D623E2FE3600A1B5E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D523E2FE3600A1B5E2 /* SceneDelegate.swift */; };
@@ -41,12 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F79229A0FED0BD02644DDEC /* Pods-NBAlufe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NBAlufe.release.xcconfig"; path = "Target Support Files/Pods-NBAlufe/Pods-NBAlufe.release.xcconfig"; sourceTree = "<group>"; };
-		93618630994C3AF4D2053609 /* Pods_NBAlufe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NBAlufe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A603D37323E489C300FD4B27 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		A61F358223E316A50026D146 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A61F358423E31F850026D146 /* MainViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtension.swift; sourceTree = "<group>"; };
-		A61F358623E322060026D146 /* matchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matchModel.swift; sourceTree = "<group>"; };
+		A61F358623E322060026D146 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
 		A61F358823E32F510026D146 /* MatchReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchReviewController.swift; sourceTree = "<group>"; };
 		A6BB45D023E2FE3600A1B5E2 /* NBAlufe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBAlufe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		A6BB45F123E2FE3B00A1B5E2 /* NBAlufeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBAlufeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BB45F523E2FE3B00A1B5E2 /* NBAlufeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBAlufeUITests.swift; sourceTree = "<group>"; };
 		A6BB45F723E2FE3B00A1B5E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D310D19616271DA6EC492772 /* Pods-NBAlufe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NBAlufe.debug.xcconfig"; path = "Target Support Files/Pods-NBAlufe/Pods-NBAlufe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C55BD03178B4BDB62BC7649 /* Pods_NBAlufe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,21 +86,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		12C1FD9D1647358473774978 /* Pods */ = {
+		A668769623F69F08001F710C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D310D19616271DA6EC492772 /* Pods-NBAlufe.debug.xcconfig */,
-				2F79229A0FED0BD02644DDEC /* Pods-NBAlufe.release.xcconfig */,
+				A61F358423E31F850026D146 /* MainViewControllerExtension.swift */,
 			);
-			path = Pods;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A670F33223E30459009E5AF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A61F358223E316A50026D146 /* CustomTableViewCell.swift */,
-				A61F358423E31F850026D146 /* MainViewControllerExtension.swift */,
-				A61F358623E322060026D146 /* matchModel.swift */,
+				A603D37323E489C300FD4B27 /* NetworkingService.swift */,
+				A61F358623E322060026D146 /* MatchModel.swift */,
+				A668769623F69F08001F710C /* Extensions */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +107,7 @@
 		A670F33323E3046A009E5AF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A61F358223E316A50026D146 /* CustomTableViewCell.swift */,
 				A6BB45D923E2FE3600A1B5E2 /* Main.storyboard */,
 				A6BB45DE23E2FE3A00A1B5E2 /* LaunchScreen.storyboard */,
 			);
@@ -135,8 +130,6 @@
 				A6BB45E923E2FE3B00A1B5E2 /* NBAlufeTests */,
 				A6BB45F423E2FE3B00A1B5E2 /* NBAlufeUITests */,
 				A6BB45D123E2FE3600A1B5E2 /* Products */,
-				12C1FD9D1647358473774978 /* Pods */,
-				CD77D18132D3AFC74B841BE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,9 +151,8 @@
 				A670F33223E30459009E5AF5 /* Models */,
 				A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */,
 				A6BB45D523E2FE3600A1B5E2 /* SceneDelegate.swift */,
-				A6BB45E123E2FE3A00A1B5E2 /* Info.plist */,
 				A6BB45DC23E2FE3A00A1B5E2 /* Assets.xcassets */,
-				A603D37323E489C300FD4B27 /* NetworkingService.swift */,
+				A6BB45E123E2FE3A00A1B5E2 /* Info.plist */,
 			);
 			path = NBAlufe;
 			sourceTree = "<group>";
@@ -183,14 +175,6 @@
 			path = NBAlufeUITests;
 			sourceTree = "<group>";
 		};
-		CD77D18132D3AFC74B841BE4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				93618630994C3AF4D2053609 /* Pods_NBAlufe.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,11 +182,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6BB45FA23E2FE3B00A1B5E2 /* Build configuration list for PBXNativeTarget "NBAlufe" */;
 			buildPhases = (
-				0B67FB18D54425DE9D972EA0 /* [CP] Check Pods Manifest.lock */,
 				A6BB45CC23E2FE3600A1B5E2 /* Sources */,
 				A6BB45CD23E2FE3600A1B5E2 /* Frameworks */,
 				A6BB45CE23E2FE3600A1B5E2 /* Resources */,
-				707BB18ACBC172065D87A329 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,48 +301,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0B67FB18D54425DE9D972EA0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NBAlufe-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		707BB18ACBC172065D87A329 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NBAlufe/Pods-NBAlufe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NBAlufe/Pods-NBAlufe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NBAlufe/Pods-NBAlufe-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		A6BB45CC23E2FE3600A1B5E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -370,7 +310,7 @@
 				A6BB45D423E2FE3600A1B5E2 /* AppDelegate.swift in Sources */,
 				A61F358323E316A50026D146 /* CustomTableViewCell.swift in Sources */,
 				A603D37423E489C400FD4B27 /* NetworkingService.swift in Sources */,
-				A61F358723E322060026D146 /* matchModel.swift in Sources */,
+				A61F358723E322060026D146 /* MatchModel.swift in Sources */,
 				A61F358923E32F510026D146 /* MatchReviewController.swift in Sources */,
 				A61F358523E31F850026D146 /* MainViewControllerExtension.swift in Sources */,
 				A6BB45D623E2FE3600A1B5E2 /* SceneDelegate.swift in Sources */,
@@ -544,7 +484,6 @@
 		};
 		A6BB45FB23E2FE3B00A1B5E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D310D19616271DA6EC492772 /* Pods-NBAlufe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -563,7 +502,6 @@
 		};
 		A6BB45FC23E2FE3B00A1B5E2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F79229A0FED0BD02644DDEC /* Pods-NBAlufe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

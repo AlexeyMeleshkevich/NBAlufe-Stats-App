@@ -1,6 +1,0 @@
-framework module Pods_NBAlufe {
-  umbrella header "Pods-NBAlufe-umbrella.h"
-
-  export *
-  module * { export * }
-}
