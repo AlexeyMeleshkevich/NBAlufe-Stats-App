@@ -11,8 +11,8 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var firstTeamImage: UIImageView!
-    @IBOutlet weak var secondTeamImage: UIImageView!
+    @IBOutlet var firstTeamImage: UIImageView!
+    @IBOutlet var secondTeamImage: UIImageView!
     
     @IBOutlet weak var firstTeamTitle: UILabel!
     @IBOutlet weak var secondTeamTitle: UILabel!

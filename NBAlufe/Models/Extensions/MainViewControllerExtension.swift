@@ -26,6 +26,13 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = matchesView.dequeueReusableCell(withIdentifier: "C§", for: indexPath) as! CustomTableViewCell
         
+        cell.firstTeamImage = UIImageView(image: UIImage(systemName: "appicon_okc"))
+        cell.secondTeamImage = UIImageView(image: UIImage(systemName: "appicon_min"))
+        cell.firstTeamTitle.text = "Minnesota Timberwolves"
+        cell.secondTeamTitle.text = "Okclahoma City Thunder"
+        cell.secondTeamPoints.text = "132"
+        cell.firstTeamPoints.text = "228"
+        
         return cell
     }
     
