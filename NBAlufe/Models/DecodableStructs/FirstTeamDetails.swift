@@ -9,10 +9,10 @@
 import Foundation
 
 struct vTeam: Decodable {
-    let teamId:   String
-    let shortName:String
-    let fullName: String
-    let nickName: String
-    let logo:     String
+    let teamId:   String?
+    let shortName:String?
+    let fullName: String?
+    let nickName: String?
+    let logo:     String?
     let score:    score
 }
