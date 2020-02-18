@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NetworkingService {
     
@@ -18,27 +19,28 @@ class NetworkingService {
         self.headers = headers
     }
     
-    func requestData() {
+    func requestData(tableView: UITableView) {
         guard let url = URL(string: self.url) else { return }
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = self.headers
         
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
-            print(response ?? "Error")
             
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
-            } catch {
-                print(error)
+                let json = try JSONDecoder().decode(APIShell.self, from: data)
+                
+                DispatchQueue.main.async {
+                    tableView.reloadData()
+                }
+                //                print(json.api.games[0].vTeam.fullName! + " " + json.api.games[0].hTeam.fullName!)
+                //                print(json.api.games[0].vTeam.score.points + " vs " + json.api.games[0].hTeam.score.points)
+                
+            } catch let error {
+                print("Error serialization json", error, response ?? "No response")
             }
-            
-//            let jsonArray = try? JSONDecoder().decode([MatchModel].self, from: data)
-//            print(jsonArray ?? "Error")
         }.resume()
     }
 }
