@@ -17,12 +17,8 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var firstTeamTitle: UILabel!
     @IBOutlet weak var secondTeamTitle: UILabel!
     
-    @IBOutlet weak var vsLabel: UILabel!
-    
     @IBOutlet weak var firstTeamPoints: UILabel!
     @IBOutlet weak var secondTeamPoints: UILabel!
-    
-    @IBOutlet weak var hyphenLabel: UILabel!
     
     
     
