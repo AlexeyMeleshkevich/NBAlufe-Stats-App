@@ -11,18 +11,20 @@ import Foundation
 
 class MainViewController: UIViewController {
     
-    internal let matches = [GameModel]()
+    //    internal let matches = [GameModel]()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var matchesView: UITableView!
     
     let button = UIButton(type: .roundedRect)
     
+    let networker = NetworkingService(url: URLData(urlKey: "2020-02-14").url,
+                                      headers: URLData.urlHeaders)
     
-    let networker = NetworkingService(url: "https://api-nba-v1.p.rapidapi.com/games/date/2020-02-14",
-                                      headers: ["x-rapidapi-host":
-                                        "api-nba-v1.p.rapidapi.com",
-                                                "x-rapidapi-key": "d3f4042bc4msh3e8baa6aaf0e778p15af52jsn260491400f82"])
+    override func loadView() {
+        super.loadView()
+        
+    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -32,7 +34,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
         self.matchesView.delegate = self
         self.matchesView.dataSource = self
     }
@@ -73,8 +74,8 @@ class MainViewController: UIViewController {
         getButton.addTarget(self, action: #selector(getButtonPressed), for: .touchUpInside)
     }
     
-    public func configureCell(cell: CustomTableViewCell, for indexPath: IndexPath) {
-        let match = self.matches[indexPath.row]
+    public func bindData(cell: CustomTableViewCell, for indexPath: IndexPath) {
+        let match = networker.matches[indexPath.row]
         
         
         if let fullName1 = match.hTeam.fullName, let fullName2 = match.vTeam.fullName {
@@ -83,8 +84,8 @@ class MainViewController: UIViewController {
         }
         
         DispatchQueue.global().async {
-            let dataFirstImage = self.dataCheck(url: self.validCheck(url: match.hTeam.logo!))
-            let dataSecondImage = self.dataCheck(url: self.validCheck(url: match.vTeam.logo!))
+            let dataFirstImage = self.getImage(url: match.hTeam.logo!)
+            let dataSecondImage = self.getImage(url: match.vTeam.logo!)
             DispatchQueue.main.async {
                 cell.firstTeamImage.image = UIImage(data: dataFirstImage)
                 cell.secondTeamImage.image = UIImage(data: dataSecondImage)
@@ -95,20 +96,25 @@ class MainViewController: UIViewController {
         cell.secondTeamPoints.text = match.vTeam.score.points
     }
     
-    public func validCheck(url: String) -> URL {
+    public func getImage(url: String) -> Data {
+        return self.dataCheck(self.validCheck(url))
+    }
+    
+    public func validCheck(_ url: String) -> URL {
         guard let url = URL(string: url) else { fatalError() }
         return url
     }
     
-    public func dataCheck(url: URL) -> Data {
+    public func dataCheck(_ url: URL) -> Data {
         guard let imageData = try? Data(contentsOf: url) else { fatalError() }
         return imageData
     }
+    
     @IBAction func segmentAction(_ sender: Any) {
     }
     
     @objc func getButtonPressed() {
-//        networker.requestData()
+        //        networker.requestData()
     }
 }
 
