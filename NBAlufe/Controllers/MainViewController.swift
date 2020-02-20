@@ -11,15 +11,16 @@ import Foundation
 
 class MainViewController: UIViewController {
     
-    //    internal let matches = [GameModel]()
+//    internal let matches = [GameModel]()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var matchesView: UITableView!
     
-    let button = UIButton(type: .roundedRect)
-    
     let networker = NetworkingService(url: URLData(urlKey: "2020-02-14").url,
-                                      headers: URLData.urlHeaders)
+                                      header: URLData.httpHeader)
+    
+    
+    // MARK: View lifecycle methods
     
     override func loadView() {
         super.loadView()
@@ -34,15 +35,16 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
         self.matchesView.delegate = self
-        self.matchesView.dataSource = self
+        self.matchesView.dataSource = self 
     }
     
     
     
     fileprivate func setUI() {
         setNavBar()
-        //        setGetButton(getButton: button)
+//        setGetButton(getButton: button)
     }
     
     
@@ -52,7 +54,9 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
-    func setGetButton(getButton: UIButton) {
+    
+    /*func setGetButton() {
+        let getButton = UIButton(type: .roundedRect)
         let height = 30
         
         getButton.layer.cornerRadius = CGFloat(height / 2)
@@ -72,7 +76,10 @@ class MainViewController: UIViewController {
             getButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
         getButton.addTarget(self, action: #selector(getButtonPressed), for: .touchUpInside)
-    }
+    } */
+    
+    
+    // MARK:  Binding cell
     
     public func bindData(cell: CustomTableViewCell, for indexPath: IndexPath) {
         let match = networker.matches[indexPath.row]
@@ -96,6 +103,8 @@ class MainViewController: UIViewController {
         cell.secondTeamPoints.text = match.vTeam.score.points
     }
     
+    // MARK: Set image funcs
+    
     public func getImage(url: String) -> Data {
         return self.dataCheck(self.validCheck(url))
     }
@@ -110,11 +119,17 @@ class MainViewController: UIViewController {
         return imageData
     }
     
+    
+    
+    
+    
+    
+    
     @IBAction func segmentAction(_ sender: Any) {
     }
     
     @objc func getButtonPressed() {
-        //        networker.requestData()
+//            networker.requestData()
     }
 }
 
