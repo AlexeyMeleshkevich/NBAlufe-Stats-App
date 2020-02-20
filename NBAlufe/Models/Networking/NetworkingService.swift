@@ -15,12 +15,12 @@ class NetworkingService {
     
     
     public let url: String
-    public let headers: [String: String]
+    public let header: [String: String]
     
     
-    init(url: String, headers: [String: String]) {
+    init(url: String, header: [String: String]) {
         self.url = url
-        self.headers = headers
+        self.header = header
     }
     
     func requestData(tableView: UITableView) {
@@ -28,15 +28,14 @@ class NetworkingService {
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         request.httpMethod = "GET"
-        request.allHTTPHeaderFields = self.headers
+        request.allHTTPHeaderFields = self.header
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
             
             do {
-//                self.apiRequest = try JSONDecoder().decode(APIShell.self, from: data)
-                self.matches = try JSONDecoder().decode([GameModel].self, from: data)
-                
+                let json = try JSONDecoder().decode(APIShell.self, from: data)
+                self.matches = json.api.games
                 DispatchQueue.main.async {
                     tableView.reloadData()
                 }
