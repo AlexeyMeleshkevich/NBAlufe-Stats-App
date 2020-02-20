@@ -11,8 +11,12 @@ import UIKit
 
 class NetworkingService {
     
-    let url: String
-    let headers: [String: String]
+    internal var matches = [GameModel]()
+    
+    
+    public let url: String
+    public let headers: [String: String]
+    
     
     init(url: String, headers: [String: String]) {
         self.url = url
@@ -30,7 +34,8 @@ class NetworkingService {
             guard let data = data else { return }
             
             do {
-                let json = try JSONDecoder().decode(APIShell.self, from: data)
+//                self.apiRequest = try JSONDecoder().decode(APIShell.self, from: data)
+                self.matches = try JSONDecoder().decode([GameModel].self, from: data)
                 
                 DispatchQueue.main.async {
                     tableView.reloadData()

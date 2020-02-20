@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+struct APIShell: Decodable {
+    let api: API
+}
