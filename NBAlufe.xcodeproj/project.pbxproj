@@ -13,10 +13,11 @@
 		A60FDE8523F9CD020016DA30 /* FirstTeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60FDE8423F9CD020016DA30 /* FirstTeamDetails.swift */; };
 		A60FDE8723F9CD0E0016DA30 /* SecondTeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60FDE8623F9CD0E0016DA30 /* SecondTeamDetails.swift */; };
 		A60FDE8923F9CDCF0016DA30 /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60FDE8823F9CDCF0016DA30 /* ScoreModel.swift */; };
+		A60FDE8D23FA80E70016DA30 /* APIShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60FDE8C23FA80E70016DA30 /* APIShell.swift */; };
 		A61F358323E316A50026D146 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358223E316A50026D146 /* CustomTableViewCell.swift */; };
 		A61F358523E31F850026D146 /* MainViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358423E31F850026D146 /* MainViewControllerExtension.swift */; };
-		A61F358723E322060026D146 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358623E322060026D146 /* MatchModel.swift */; };
 		A61F358923E32F510026D146 /* MatchReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358823E32F510026D146 /* MatchReviewController.swift */; };
+		A66D13C523FECFDE0030E15D /* UrlData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D13C423FECFDE0030E15D /* UrlData.swift */; };
 		A6BB45D423E2FE3600A1B5E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */; };
 		A6BB45D623E2FE3600A1B5E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D523E2FE3600A1B5E2 /* SceneDelegate.swift */; };
 		A6BB45D823E2FE3600A1B5E2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D723E2FE3600A1B5E2 /* MainViewController.swift */; };
@@ -51,10 +52,11 @@
 		A60FDE8423F9CD020016DA30 /* FirstTeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTeamDetails.swift; sourceTree = "<group>"; };
 		A60FDE8623F9CD0E0016DA30 /* SecondTeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTeamDetails.swift; sourceTree = "<group>"; };
 		A60FDE8823F9CDCF0016DA30 /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
+		A60FDE8C23FA80E70016DA30 /* APIShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIShell.swift; sourceTree = "<group>"; };
 		A61F358223E316A50026D146 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A61F358423E31F850026D146 /* MainViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtension.swift; sourceTree = "<group>"; };
-		A61F358623E322060026D146 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
 		A61F358823E32F510026D146 /* MatchReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchReviewController.swift; sourceTree = "<group>"; };
+		A66D13C423FECFDE0030E15D /* UrlData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlData.swift; sourceTree = "<group>"; };
 		A6BB45D023E2FE3600A1B5E2 /* NBAlufe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBAlufe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6BB45D523E2FE3600A1B5E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		A60FDE8323F9CA7C0016DA30 /* DecodableStructs */ = {
 			isa = PBXGroup;
 			children = (
+				A60FDE8C23FA80E70016DA30 /* APIShell.swift */,
 				A60FDE7F23F9C9840016DA30 /* GamesModel.swift */,
 				A60FDE8123F9C9AA0016DA30 /* GameModel.swift */,
 				A60FDE8423F9CD020016DA30 /* FirstTeamDetails.swift */,
@@ -125,15 +128,30 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		A66D13C323FECF4D0030E15D /* NetworkingStructs */ = {
+			isa = PBXGroup;
+			children = (
+				A66D13C423FECFDE0030E15D /* UrlData.swift */,
+				A60FDE8323F9CA7C0016DA30 /* DecodableStructs */,
+			);
+			path = NetworkingStructs;
+			sourceTree = "<group>";
+		};
+		A66D13C623FED0700030E15D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A603D37323E489C300FD4B27 /* NetworkingService.swift */,
+				A66D13C323FECF4D0030E15D /* NetworkingStructs */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		A670F33223E30459009E5AF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A60FDE8323F9CA7C0016DA30 /* DecodableStructs */,
+				A66D13C623FED0700030E15D /* Networking */,
 				A666B88E23F9C13600126C38 /* AppSet */,
 				A61F358223E316A50026D146 /* CustomTableViewCell.swift */,
-				A603D37323E489C300FD4B27 /* NetworkingService.swift */,
-				A61F358623E322060026D146 /* MatchModel.swift */,
-				A668769623F69F08001F710C /* Extensions */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +168,7 @@
 		A670F33423E30478009E5AF5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A668769623F69F08001F710C /* Extensions */,
 				A6BB45D723E2FE3600A1B5E2 /* MainViewController.swift */,
 				A61F358823E32F510026D146 /* MatchReviewController.swift */,
 			);
@@ -340,10 +359,11 @@
 				A6BB45D823E2FE3600A1B5E2 /* MainViewController.swift in Sources */,
 				A60FDE8923F9CDCF0016DA30 /* ScoreModel.swift in Sources */,
 				A6BB45D423E2FE3600A1B5E2 /* AppDelegate.swift in Sources */,
+				A66D13C523FECFDE0030E15D /* UrlData.swift in Sources */,
 				A61F358323E316A50026D146 /* CustomTableViewCell.swift in Sources */,
 				A603D37423E489C400FD4B27 /* NetworkingService.swift in Sources */,
-				A61F358723E322060026D146 /* MatchModel.swift in Sources */,
 				A60FDE8523F9CD020016DA30 /* FirstTeamDetails.swift in Sources */,
+				A60FDE8D23FA80E70016DA30 /* APIShell.swift in Sources */,
 				A60FDE8223F9C9AA0016DA30 /* GameModel.swift in Sources */,
 				A61F358923E32F510026D146 /* MatchReviewController.swift in Sources */,
 				A61F358523E31F850026D146 /* MainViewControllerExtension.swift in Sources */,
