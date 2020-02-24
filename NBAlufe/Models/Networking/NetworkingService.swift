@@ -21,6 +21,7 @@ class NetworkingService {
     init(url: String, header: [String: String]) {
         self.url = url
         self.header = header
+        print(url)
     }
     
     func requestData(tableView: UITableView) {

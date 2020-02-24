@@ -13,10 +13,15 @@ class MainViewController: UIViewController {
     
     //    internal let matches = [GameModel]()
     
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        rightUrlTask()
+//    }                                                  !!!!!!!!!!!!!!!!!!
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var matchesView: UITableView!
     
-    let networker = NetworkingService(url: URLData(urlKey: "2020-02-23").url,
+    let networker = NetworkingService(url: URLData(urlKey: CalendarData.stringCurrentDay).url,
                                       header: URLData.httpHeader)
     
     
@@ -36,6 +41,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         
+        print(CalendarData.stringCurrentDay)
+        
+        
         self.matchesView.delegate = self
         self.matchesView.dataSource = self 
     }
@@ -47,11 +55,16 @@ class MainViewController: UIViewController {
         //        setGetButton(getButton: button)
     }
     
+//    func rightUrlTask() {
+//        if CalendarData.month < 10 {
+//            CalendarData.stringCurrentDay = "\(CalendarData.year)-0\(CalendarData.month)-\(CalendarData.day)"
+//        }
+//    }
     
     func setNavBar() {
         self.title = "NBA matches"
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 20.0 / 255.0, green: 78.0 / 255.0, blue: 157.0 / 255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.barTintColor = Constants.blueAppColor
+        self.navigationController?.navigationBar.titleTextAttributes = Constants.whiteColor
     }
     
     
