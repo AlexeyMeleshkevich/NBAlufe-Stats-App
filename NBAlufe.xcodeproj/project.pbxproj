@@ -17,7 +17,9 @@
 		A61F358323E316A50026D146 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358223E316A50026D146 /* CustomTableViewCell.swift */; };
 		A61F358523E31F850026D146 /* MainViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358423E31F850026D146 /* MainViewControllerExtension.swift */; };
 		A61F358923E32F510026D146 /* MatchReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61F358823E32F510026D146 /* MatchReviewController.swift */; };
+		A633B4032404505200DE4218 /* CalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633B4022404505200DE4218 /* CalendarData.swift */; };
 		A66D13C523FECFDE0030E15D /* UrlData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D13C423FECFDE0030E15D /* UrlData.swift */; };
+		A6B96E8F2403BB2B00BFFF9E /* ReusableConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B96E8E2403BB2B00BFFF9E /* ReusableConstants.swift */; };
 		A6BB45D423E2FE3600A1B5E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */; };
 		A6BB45D623E2FE3600A1B5E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D523E2FE3600A1B5E2 /* SceneDelegate.swift */; };
 		A6BB45D823E2FE3600A1B5E2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB45D723E2FE3600A1B5E2 /* MainViewController.swift */; };
@@ -56,7 +58,9 @@
 		A61F358223E316A50026D146 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A61F358423E31F850026D146 /* MainViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtension.swift; sourceTree = "<group>"; };
 		A61F358823E32F510026D146 /* MatchReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchReviewController.swift; sourceTree = "<group>"; };
+		A633B4022404505200DE4218 /* CalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarData.swift; sourceTree = "<group>"; };
 		A66D13C423FECFDE0030E15D /* UrlData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlData.swift; sourceTree = "<group>"; };
+		A6B96E8E2403BB2B00BFFF9E /* ReusableConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableConstants.swift; sourceTree = "<group>"; };
 		A6BB45D023E2FE3600A1B5E2 /* NBAlufe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBAlufe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BB45D323E2FE3600A1B5E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6BB45D523E2FE3600A1B5E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 		A6BB45D223E2FE3600A1B5E2 /* NBAlufe */ = {
 			isa = PBXGroup;
 			children = (
+				A633B4022404505200DE4218 /* CalendarData.swift */,
+				A6B96E8E2403BB2B00BFFF9E /* ReusableConstants.swift */,
 				A670F33423E30478009E5AF5 /* Controllers */,
 				A670F33323E3046A009E5AF5 /* Views */,
 				A670F33223E30459009E5AF5 /* Models */,
@@ -357,9 +363,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6BB45D823E2FE3600A1B5E2 /* MainViewController.swift in Sources */,
+				A633B4032404505200DE4218 /* CalendarData.swift in Sources */,
 				A60FDE8923F9CDCF0016DA30 /* ScoreModel.swift in Sources */,
 				A6BB45D423E2FE3600A1B5E2 /* AppDelegate.swift in Sources */,
 				A66D13C523FECFDE0030E15D /* UrlData.swift in Sources */,
+				A6B96E8F2403BB2B00BFFF9E /* ReusableConstants.swift in Sources */,
 				A61F358323E316A50026D146 /* CustomTableViewCell.swift in Sources */,
 				A603D37423E489C400FD4B27 /* NetworkingService.swift in Sources */,
 				A60FDE8523F9CD020016DA30 /* FirstTeamDetails.swift in Sources */,

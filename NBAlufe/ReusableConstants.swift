@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+struct Constants {
+    static let cavsLogoUrl = "https://i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/cavaliers/images/170531-primary-logo.png"
+}
