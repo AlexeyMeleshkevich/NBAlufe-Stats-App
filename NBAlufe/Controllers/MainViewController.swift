@@ -11,12 +11,12 @@ import Foundation
 
 class MainViewController: UIViewController {
     
-//    internal let matches = [GameModel]()
+    //    internal let matches = [GameModel]()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var matchesView: UITableView!
     
-    let networker = NetworkingService(url: URLData(urlKey: "2020-02-14").url,
+    let networker = NetworkingService(url: URLData(urlKey: "2020-02-23").url,
                                       header: URLData.httpHeader)
     
     
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
     
     fileprivate func setUI() {
         setNavBar()
-//        setGetButton(getButton: button)
+        //        setGetButton(getButton: button)
     }
     
     
@@ -56,27 +56,27 @@ class MainViewController: UIViewController {
     
     
     /*func setGetButton() {
-        let getButton = UIButton(type: .roundedRect)
-        let height = 30
-        
-        getButton.layer.cornerRadius = CGFloat(height / 2)
-        getButton.setTitle("Get json", for: .normal)
-        getButton.setTitleColor(.white, for: .normal)
-        getButton.backgroundColor = UIColor(red: 20.0 / 255.0, green: 78.0 / 255.0, blue: 157.0 / 255.0, alpha: 1.0)
-        
-        //taskButton.sizeToFit()
-        view.addSubview(getButton)
-        
-        getButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            getButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 240),
-            getButton.heightAnchor.constraint(equalToConstant: CGFloat(height)),
-            getButton.widthAnchor.constraint(equalToConstant: 140),
-            getButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-        ])
-        getButton.addTarget(self, action: #selector(getButtonPressed), for: .touchUpInside)
-    } */
+     let getButton = UIButton(type: .roundedRect)
+     let height = 30
+     
+     getButton.layer.cornerRadius = CGFloat(height / 2)
+     getButton.setTitle("Get json", for: .normal)
+     getButton.setTitleColor(.white, for: .normal)
+     getButton.backgroundColor = UIColor(red: 20.0 / 255.0, green: 78.0 / 255.0, blue: 157.0 / 255.0, alpha: 1.0)
+     
+     //taskButton.sizeToFit()
+     view.addSubview(getButton)
+     
+     getButton.translatesAutoresizingMaskIntoConstraints = false
+     
+     NSLayoutConstraint.activate([
+     getButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 240),
+     getButton.heightAnchor.constraint(equalToConstant: CGFloat(height)),
+     getButton.widthAnchor.constraint(equalToConstant: 140),
+     getButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+     ])
+     getButton.addTarget(self, action: #selector(getButtonPressed), for: .touchUpInside)
+     } */
     
     
     // MARK:  Binding cell
@@ -110,7 +110,9 @@ class MainViewController: UIViewController {
     }
     
     public func validCheck(_ url: String) -> URL {
-        guard let url = URL(string: url) else { fatalError() }
+        guard let url = URL(string: url) else { guard let errorUrl = URL(string: Constants.cavsLogoUrl) else { fatalError() }
+            return errorUrl
+        }
         return url
     }
     
@@ -129,7 +131,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func getButtonPressed() {
-//            networker.requestData()
+        //            networker.requestData()
     }
 }
 
