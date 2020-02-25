@@ -15,6 +15,10 @@ extension MainViewController: UITableViewDelegate {
 
 extension MainViewController: UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

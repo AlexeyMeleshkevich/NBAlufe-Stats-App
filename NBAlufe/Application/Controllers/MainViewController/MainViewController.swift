@@ -11,15 +11,24 @@ import Foundation
 
 class MainViewController: UIViewController {
     
-    //    internal let matches = [GameModel]()
     
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        rightUrlTask()
-//    }                                                  !!!!!!!!!!!!!!!!!!
-    
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var matchesView: UITableView!
+    
+    let months = ["January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July",
+                  "August",
+                  "September",
+                  "October",
+                  "November",
+                  "December"]
+    let currentMonth = CalendarData.month
     
     let networker = NetworkingService(url: URLData(urlKey: CalendarData.stringCurrentDay).url,
                                       header: URLData.httpHeader)
@@ -39,27 +48,41 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
+        
+        self.matchesView.delegate = self
+        self.matchesView.dataSource = self
+        
+        setUI(matchesView)
+        
+        self.startActivityInticator()
         
         print(CalendarData.stringCurrentDay)
         
-        
-        self.matchesView.delegate = self
-        self.matchesView.dataSource = self 
     }
     
     
+    // MARK: set UI funcs
     
-    fileprivate func setUI() {
+    fileprivate func setUI(_ tableView: UITableView) {
         setNavBar()
-        //        setGetButton(getButton: button)
+        setHeaderView(tableView: tableView)
+        
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.isHidden = true
     }
     
-//    func rightUrlTask() {
-//        if CalendarData.month < 10 {
-//            CalendarData.stringCurrentDay = "\(CalendarData.year)-0\(CalendarData.month)-\(CalendarData.day)"
-//        }
-//    }
+    fileprivate func setHeaderView(tableView: UITableView) {
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 36))
+        header.backgroundColor = UIColor.white
+        let label = UILabel(frame: header.bounds)
+        label.text = "\(self.months[self.currentMonth - 1]), \(CalendarData.day)"
+        label.textAlignment = .center
+        label.textColor = UIColor.lightGray
+        header.addSubview(label)
+        
+        tableView.tableHeaderView = header
+        
+    }
     
     func setNavBar() {
         self.title = "NBA matches"
@@ -67,30 +90,18 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = Constants.whiteColor
     }
     
+    func startActivityInticator() {
+        self.activityIndicator.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        self.matchesView.isHidden = true
+        self.activityIndicator.startAnimating()
+    }
     
-    /*func setGetButton() {
-     let getButton = UIButton(type: .roundedRect)
-     let height = 30
-     
-     getButton.layer.cornerRadius = CGFloat(height / 2)
-     getButton.setTitle("Get json", for: .normal)
-     getButton.setTitleColor(.white, for: .normal)
-     getButton.backgroundColor = UIColor(red: 20.0 / 255.0, green: 78.0 / 255.0, blue: 157.0 / 255.0, alpha: 1.0)
-     
-     //taskButton.sizeToFit()
-     view.addSubview(getButton)
-     
-     getButton.translatesAutoresizingMaskIntoConstraints = false
-     
-     NSLayoutConstraint.activate([
-     getButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 240),
-     getButton.heightAnchor.constraint(equalToConstant: CGFloat(height)),
-     getButton.widthAnchor.constraint(equalToConstant: 140),
-     getButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-     ])
-     getButton.addTarget(self, action: #selector(getButtonPressed), for: .touchUpInside)
-     } */
-    
+    func stopActivityIndicator() {
+        self.view.isUserInteractionEnabled = true
+        self.activityIndicator.stopAnimating()
+        self.matchesView.isHidden = false
+    }
     
     // MARK:  Binding cell
     
@@ -109,6 +120,7 @@ class MainViewController: UIViewController {
             DispatchQueue.main.async {
                 cell.firstTeamImage.image = UIImage(data: dataFirstImage)
                 cell.secondTeamImage.image = UIImage(data: dataSecondImage)
+                self.stopActivityIndicator()
             }
         }
         
@@ -134,19 +146,48 @@ class MainViewController: UIViewController {
         return imageData
     }
     
-    
-    
-    
-    
-    
+    // MARK: IBActions funcs
     
     @IBAction func segmentAction(_ sender: Any) {
-    }
-    
-    @objc func getButtonPressed() {
-        //            networker.requestData()
+        
     }
 }
+
+
+
+
+
+
+
+/*func setGetButton() {
+ let getButton = UIButton(type: .roundedRect)
+ let height = 30
+ 
+ getButton.layer.cornerRadius = CGFloat(height / 2)
+ getButton.setTitle("Get json", for: .normal)
+ getButton.setTitleColor(.white, for: .normal)
+ getButton.backgroundColor = UIColor(red: 20.0 / 255.0, green: 78.0 / 255.0, blue: 157.0 / 255.0, alpha: 1.0)
+ 
+ //taskButton.sizeToFit()
+ view.addSubview(getButton)
+ 
+ getButton.translatesAutoresizingMaskIntoConstraints = false
+ 
+ NSLayoutConstraint.activate([
+ getButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 240),
+ getButton.heightAnchor.constraint(equalToConstant: CGFloat(height)),
+ getButton.widthAnchor.constraint(equalToConstant: 140),
+ getButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+ ])
+ getButton.addTarget(self, action: #selector(getButtonPressed), for: .touchUpInside)
+ }
+ 
+ @objc func getButtonPressed() {
+ networker.requestData()
+ }
+ */
+
+
 
 
 
