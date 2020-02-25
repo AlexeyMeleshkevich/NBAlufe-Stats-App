@@ -16,7 +16,7 @@ struct CalendarData {
     static var weekday = calendar.component(.weekday, from: date)
     static var month = calendar.component(.month, from: date)
     static var year = calendar.component(.year, from: date)
-    static var stringCurrentDay: String {
+    static  var stringCurrentDay: String {
         get {
             if self.month < 10 {
                 let get1 = "\(self.year)-0\(self.month)-\(self.day)"
