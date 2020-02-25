@@ -22,7 +22,7 @@
                                     <segment title="Live"/>
                                 </segments>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xne-rs-Wdd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xne-rs-Wdd">
                                 <rect key="frame" x="0.0" y="127" width="414" height="735"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -112,10 +112,14 @@
                                             <outlet property="secondTeamImage" destination="Nhx-eE-ewp" id="3Mf-6N-cGj"/>
                                             <outlet property="secondTeamPoints" destination="v1M-9w-qr6" id="w34-M3-8tT"/>
                                             <outlet property="secondTeamTitle" destination="6d2-2p-3zi" id="1j5-gg-E2J"/>
+                                            <segue destination="RFL-53-Ko0" kind="presentation" id="vti-2f-6n3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="OFg-Qw-ldn">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -125,12 +129,15 @@
                             <constraint firstAttribute="bottomMargin" secondItem="Xne-rs-Wdd" secondAttribute="bottom" id="OAL-Ii-4hg"/>
                             <constraint firstItem="b1t-AL-GXz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="X3b-2w-yYs"/>
                             <constraint firstItem="Xne-rs-Wdd" firstAttribute="top" secondItem="b1t-AL-GXz" secondAttribute="bottom" constant="8" id="bka-g9-Gim"/>
+                            <constraint firstItem="OFg-Qw-ldn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="v85-i2-tsT"/>
+                            <constraint firstItem="OFg-Qw-ldn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vzp-gY-Scr"/>
                             <constraint firstItem="b1t-AL-GXz" firstAttribute="trailing" secondItem="Xne-rs-Wdd" secondAttribute="trailing" id="wKt-Oe-M6f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="UyD-6Q-x2l"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="OFg-Qw-ldn" id="YfZ-QF-Zqk"/>
                         <outlet property="matchesView" destination="Xne-rs-Wdd" id="X77-kZ-R2T"/>
                         <outlet property="segmentedControl" destination="b1t-AL-GXz" id="G8w-RU-Uls"/>
                     </connections>
@@ -140,19 +147,19 @@
             <point key="canvasLocation" x="1047.8260869565217" y="112.5"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="1Rz-FE-OwT">
+        <scene sceneID="JHg-c5-c8B">
             <objects>
-                <viewController id="Eog-e2-d36" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vWO-zd-arE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <viewController id="RFL-53-Ko0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wQg-Cv-aOL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="U52-rK-SR1"/>
+                        <viewLayoutGuide key="safeArea" id="O5h-on-hL7"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zEC-9k-KVo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYG-18-Zde" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1956" y="109"/>
+            <point key="canvasLocation" x="1759" y="113"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MQ1-ev-tJc">
@@ -171,7 +178,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ai4-BM-5Tm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="112.5"/>
+            <point key="canvasLocation" x="342" y="113"/>
         </scene>
     </scenes>
 </document>
