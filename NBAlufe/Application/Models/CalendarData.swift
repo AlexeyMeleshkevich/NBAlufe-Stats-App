@@ -16,15 +16,36 @@ struct CalendarData {
     static var weekday = calendar.component(.weekday, from: date)
     static var month = calendar.component(.month, from: date)
     static var year = calendar.component(.year, from: date)
-    static  var stringCurrentDay: String {
+    static var stringCurrentDay: String {
         get {
-            if self.month < 10 {
-                let get1 = "\(self.year)-0\(self.month)-\(self.day)"
-                return get1
-            } else {
-                let get2 = "\(self.year)-0\(self.month)-\(self.day)"
-                return get2
+            switch self.day {
+            case 1...9:
+                switch self.month {
+                case 0..<10:
+                    let get1 = "\(self.year)-0\(self.month)-0\(self.day)"
+                    return get1
+                default:
+                    let get2 = "\(self.year)-\(self.month)-0\(self.day)"
+                    return get2
+                }
+            default:
+                switch self.month {
+                case 0..<10:
+                    let get1 = "\(self.year)-0\(self.month)-\(self.day)"
+                    return get1
+                default:
+                    let get2 = "\(self.year)-\(self.month)-\(self.day)"
+                    return get2
+                }
             }
         }
     }
 }
+
+//if self.month < 10 {
+//
+//    return get1
+//} else {
+//    let get2 = "\(self.year)-0\(self.month)-\(self.day)"
+//    return get2
+//}
