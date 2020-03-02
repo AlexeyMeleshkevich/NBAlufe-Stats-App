@@ -11,10 +11,14 @@ import Foundation
 
 class MainViewController: UIViewController {
     
-    
+    @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var matchesView: UITableView!
+    
+    let pickerView = UIView()
+    let toolbar = UIToolbar()
+    let picker = UIDatePicker()
     
     let months = ["January",
                   "February",
@@ -28,6 +32,8 @@ class MainViewController: UIViewController {
                   "October",
                   "November",
                   "December"]
+    
+    
     let currentMonth = CalendarData.month
     
     let networker = NetworkingService(url: URLData(urlKey: CalendarData.stringCurrentDay).url,
@@ -56,15 +62,18 @@ class MainViewController: UIViewController {
         
         self.startActivityInticator()
         
+        //        self.view.addSubview(self.pickerView)
+        
         print(CalendarData.stringCurrentDay)
         
     }
     
     
-    // MARK: set UI funcs
+    // MARK: Set UI funcs
     
     fileprivate func setUI(_ tableView: UITableView) {
         setNavBar()
+        setPicker()
         setHeaderView(tableView: tableView)
         
         self.activityIndicator.hidesWhenStopped = true
@@ -84,8 +93,56 @@ class MainViewController: UIViewController {
         
     }
     
+    private func setPicker() {
+        let margins = self.view.layoutMarginsGuide
+        
+        view.addSubview(self.pickerView)
+        view.addSubview(self.toolbar)
+        
+        pickerView.isHidden = true
+        toolbar.isHidden = true
+        pickerView.backgroundColor = .white
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            view.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0),
+            view.leftAnchor.constraint(equalTo: margins.leftAnchor, constant: 0),
+            view.rightAnchor.constraint(equalTo: margins.rightAnchor, constant: 0),
+            view.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        picker.datePickerMode = .time
+        picker.setDate(Date(), animated: true)
+        
+        toolbar.barStyle = .black
+        toolbar.barTintColor = .blue
+        toolbar.tintColor = .white
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            toolbar.heightAnchor.constraint(equalToConstant: 50),
+            toolbar.leftAnchor.constraint(equalTo: margins.leftAnchor, constant: 0),
+            toolbar.rightAnchor.constraint(equalTo: margins.rightAnchor, constant: 0),
+            toolbar.bottomAnchor.constraint(equalTo: self.pickerView.bottomAnchor, constant: 0)
+        ])
+        self.embedButtons(toolbar)
+    }
+    
+    @objc func donePressed() {
+        self.pickerView.isHidden = true
+    }
+    
+    private func embedButtons(_ toolbar: UIToolbar) {
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        
+        let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        toolbar.setItems([flexButton, doneButton], animated: true)
+    }
+    
     func setNavBar() {
-        self.title = "NBA matches"
+        self.title = "Matches"
         self.navigationController?.navigationBar.barTintColor = Constants.blueAppColor
         self.navigationController?.navigationBar.titleTextAttributes = Constants.whiteColor
     }
@@ -142,11 +199,35 @@ class MainViewController: UIViewController {
     }
     
     public func dataCheck(_ url: URL) -> Data {
-        guard let imageData = try? Data(contentsOf: url) else { fatalError() }
+        guard let imageData = try? Data(contentsOf: url) else {
+            guard let fakeImage = try? Data(contentsOf: Constants.pistonsLogoUrl!) else {
+                fatalError() }
+            return fakeImage }
         return imageData
     }
     
     // MARK: IBActions funcs
+    @IBAction func searchButtonAction(_ sender: Any) {
+        //        let alert = UIAlertController(title: "Search match", message: "Enter game date in field below", preferredStyle: .actionSheet)
+        //
+        //        let okayAction = UIAlertAction(title: "Ok", style: .default) { (okayAction) in
+        //            //            if alert.textFields![0].text?.isEmpty == true {
+        //            //
+        //            //            }
+        //        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        //        //        alert.addTextField { (dateTF) in
+        //        //            dateTF.placeholder = "YYYY-MM-DD"
+        //        //        }
+        //
+        //
+        //        alert.addAction(okayAction)
+        //        alert.addAction(cancelAction)
+        //        self.present(alert, animated: true, completion: nil)
+        
+        self.pickerView.isHidden = false
+        self.toolbar.isHidden = false
+    }
     
     @IBAction func segmentAction(_ sender: Any) {
         
