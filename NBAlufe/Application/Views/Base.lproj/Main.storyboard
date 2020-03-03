@@ -135,10 +135,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UyD-6Q-x2l"/>
+                    <navigationItem key="navigationItem" id="UyD-6Q-x2l">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="8EF-XN-M6f">
+                            <color key="tintColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="searchButtonAction:" destination="BYZ-38-t0r" id="Bkw-Kp-8NK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="OFg-Qw-ldn" id="YfZ-QF-Zqk"/>
                         <outlet property="matchesView" destination="Xne-rs-Wdd" id="X77-kZ-R2T"/>
+                        <outlet property="searchButton" destination="8EF-XN-M6f" id="Y4o-QI-MPy"/>
                         <outlet property="segmentedControl" destination="b1t-AL-GXz" id="G8w-RU-Uls"/>
                     </connections>
                 </viewController>

@@ -13,7 +13,6 @@ class NetworkingService {
     
     internal var matches = [GameModel]()
     
-    
     public let url: String
     public let header: [String: String]
     
@@ -27,7 +26,7 @@ class NetworkingService {
     func requestData(tableView: UITableView) {
         guard let url = URL(string: self.url) else { return }
         
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = self.header
         
