@@ -32,7 +32,7 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.matchesView.dequeueReusableCell(withIdentifier: "C§", for: indexPath) as! CustomTableViewCell
+        let cell = self.matchesView.dequeueReusableCell(withIdentifier: Constants.matchCellID, for: indexPath) as! CustomTableViewCell
         
         bindData(cell: cell, for: indexPath)
         
