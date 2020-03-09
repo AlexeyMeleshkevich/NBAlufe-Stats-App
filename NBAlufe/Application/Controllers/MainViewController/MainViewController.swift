@@ -14,14 +14,16 @@ class MainViewController: UIViewController {
     
     // MARK: UI components
     
-    @IBOutlet weak var segmentedControl: UISegmentedControl! // Constraints: left right top(navBar)
-    @IBOutlet weak var matchesView: UITableView!             // Constraints: left right top(segmentedControl)
     
-    private let activityIndicator = UIActivityIndicatorView() // Constraints: center(matchesView(Y X))
-    private let pickerView = UIView()                         // OK
-    private let toolbar = UIToolbar()                         // OK
-    private let picker = UIDatePicker()                       // OK
-    private var searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonAction)) // No
+    let matchesView = UITableView()
+    let segmentedControl = UISegmentedControl(items: Constants.segmentItems)
+    let activityIndicator = UIActivityIndicatorView()
+    let pickerView = UIView()
+    let toolbar = UIToolbar()
+    let picker = UIDatePicker()
+    let searchButton = UIBarButtonItem(barButtonSystemItem: .search,
+                                       target: self,
+                                       action: #selector(searchButtonAction))
     
     // MARK: Date for set UI
     
@@ -53,38 +55,65 @@ class MainViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        self.matchesView.delegate = self
-        self.matchesView.dataSource = self
-        
-        networker.requestData(tableView: self.matchesView)
+        print(CalendarData.stringCurrentDay)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI(tableView:   matchesView,
+        segmentedControl:  segmentedControl,
+        picker:            picker,
+        activityIndicator: activityIndicator,
+        toolbar:           toolbar)
+        print("223")
+        networker.requestData(tableView: self.matchesView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("View will appear")
-        //        setUI(matchesView)
-        setNavBar()
-        setPicker()
-        setHeaderView(tableView: self.matchesView)
-        
-        setActivityIndicator()
-        startActivityInticator()
     }
     
     
     // MARK: Main set UI func
     
-    fileprivate func setUI(_ tableView: UITableView) {
+    func addSubview(_ sender: UIView) {
+        self.view.addSubview(sender)
+    }
+    
+    fileprivate func setUI(tableView: UITableView,
+                           segmentedControl: UISegmentedControl,
+                           picker: UIDatePicker,
+                           activityIndicator: UIActivityIndicatorView,
+                           toolbar: UIToolbar) {
         
+        setNavigationBar()
+        setSegmentedControl(segment: segmentedControl)
+        setTableView(tableView: tableView)
+        setHeaderView(tableView: tableView)
+        setActivityIndicator(activity: activityIndicator)
+        setPicker(picker: picker)
+        setToolbar(toolbar: toolbar)
     }
     
     // MARK: Secondary UI funcs
+    
+    // Navigation Bar
+    private func setNavigationBar() {
+        self.title = "Matches"
+        self.navigationController?.navigationBar.barTintColor = Constants.blueAppColor
+        self.navigationController?.navigationBar.titleTextAttributes = Constants.whiteColor
+    }
+    // MatchesView
+    private func setTableView(tableView: UITableView) {
+        self.matchesView.delegate = self
+        self.matchesView.dataSource = self
+        
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: Constants.matchCellID)
+        
+        addSubview(tableView)
+        setTableViewConstraints(tableView)
+    }
     // MatchesView Header
-    fileprivate func setHeaderView(tableView: UITableView) {
+    private func setHeaderView(tableView: UITableView) {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 36))
         header.backgroundColor = UIColor.white
         let label = UILabel(frame: header.bounds)
@@ -95,87 +124,52 @@ class MainViewController: UIViewController {
         
         tableView.tableHeaderView = header
     }
-    // MatchesView Constraints
-    private func setTableViewConstraints() {
-        self.matchesView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.matchesView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 0),
-            self.matchesView.leftToSuperview(),
-            self.matchesView.rightToSuperview()
-        ])
-    }
     // SegmentedControl
-    private func setSegmentedControl() {
-        self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.segmentedControl.topAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: 0),
-            self.segmentedControl.leftToSuperview(),
-            self.segmentedControl.rightToSuperview()
-        ])
+    private func setSegmentedControl(segment: UISegmentedControl) {
+        addSubview(segment)
+        setSegmentedControlConstraints(segment)
     }
-    // SearchBar
+    // SearchButton
     private func setSearchBarButton() {
         self.navigationController?.navigationItem.rightBarButtonItem = self.searchButton
     }
     // Date Picker
-    private func setPicker() {
-        let margins = self.view.layoutMarginsGuide
-        
-        view.addSubview(self.pickerView)
-        view.addSubview(self.toolbar)
+    private func setPicker(picker: UIDatePicker) {
+        addSubview(picker)
+        setPickerViewConstraints(picker)
         
         pickerView.isHidden = true
-        toolbar.isHidden = true
         pickerView.backgroundColor = .white
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([pickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
-                                     pickerView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0),
-                                     pickerView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0),
-                                     pickerView.heightAnchor.constraint(equalToConstant: 200)])
         
         picker.datePickerMode = .time
         picker.setDate(Date(), animated: true)
-        
+    }
+    // Toolbar
+    private func setToolbar(toolbar: UIToolbar) {
+        toolbar.isHidden = true
         toolbar.barStyle = .black
         toolbar.barTintColor = .blue
         toolbar.tintColor = .white
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            toolbar.heightAnchor.constraint(equalToConstant: 50),
-            toolbar.leftAnchor.constraint(equalTo: margins.leftAnchor, constant: 0),
-            toolbar.rightAnchor.constraint(equalTo: margins.rightAnchor, constant: 0),
-            toolbar.bottomAnchor.constraint(equalTo: self.pickerView.bottomAnchor, constant: 0)
-        ])
+        embedButtons(toolbar)
         
-        self.embedButtons(toolbar)
+        addSubview(toolbar)
+        setToolbarConstraints(toolbar)
     }
-    // Toolbar buttons
+    
     private func embedButtons(_ toolbar: UIToolbar) {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         toolbar.setItems([flexButton, doneButton], animated: true)
     }
-    // Navigation Bar
-    private func setNavBar() {
-        self.title = "Matches"
-        self.navigationController?.navigationBar.barTintColor = Constants.blueAppColor
-        self.navigationController?.navigationBar.titleTextAttributes = Constants.whiteColor
-    }
     // Activity Indicator
-    private func setActivityIndicator() {
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.isHidden = true
+    private func setActivityIndicator(activity: UIActivityIndicatorView) {
+        activity.hidesWhenStopped = true
+        activity.isHidden = true
         
-        self.view.addSubview(self.activityIndicator)
-        
-        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            self.activityIndicator.centerXAnchor.constraint(equalTo: self.matchesView.centerXAnchor, constant: 0),
-            self.activityIndicator.centerYAnchor.constraint(equalTo: self.matchesView.centerYAnchor, constant: 0)
-        ])
+        addSubview(activity)
+        setActivityIndicatorConstraints(activity)
+        startActivityIndicator()
     }
     
     // MARK:  Binding cell
@@ -226,7 +220,7 @@ class MainViewController: UIViewController {
     
     // MARK: Actions funcs
     
-    private func startActivityInticator() {
+    private func startActivityIndicator() {
         self.activityIndicator.isHidden = false
         self.view.isUserInteractionEnabled = false
         self.matchesView.isHidden = true
