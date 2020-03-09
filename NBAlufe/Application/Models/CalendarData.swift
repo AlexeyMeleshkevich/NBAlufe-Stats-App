@@ -18,6 +18,7 @@ struct CalendarData {
     static var year = calendar.component(.year, from: date)
     static var stringCurrentDay: String {
         get {
+            
             switch self.day {
             case 1...9:
                 switch self.month {
@@ -41,11 +42,3 @@ struct CalendarData {
         }
     }
 }
-
-//if self.month < 10 {
-//
-//    return get1
-//} else {
-//    let get2 = "\(self.year)-0\(self.month)-\(self.day)"
-//    return get2
-//}

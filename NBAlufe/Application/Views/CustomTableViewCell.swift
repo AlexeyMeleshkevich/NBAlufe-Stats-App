@@ -20,7 +20,9 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var firstTeamPoints: UILabel!
     @IBOutlet weak var secondTeamPoints: UILabel!
     
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

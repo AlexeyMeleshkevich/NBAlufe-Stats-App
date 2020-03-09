@@ -39,8 +39,8 @@ class NetworkingService {
                 DispatchQueue.main.async {
                     tableView.reloadData()
                 }
-                //                print(json.api.games[0].vTeam.fullName! + " " + json.api.games[0].hTeam.fullName!)
-                //                print(json.api.games[0].vTeam.score.points + " vs " + json.api.games[0].hTeam.score.points)
+                print(json.api.games[0].vTeam.fullName! + " " + json.api.games[0].hTeam.fullName!)
+                print(json.api.games[0].vTeam.score.points + " vs " + json.api.games[0].hTeam.score.points)
                 
             } catch let error {
                 print("Error serialization json", error, response ?? "No response")
