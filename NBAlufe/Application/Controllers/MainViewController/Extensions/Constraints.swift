@@ -21,15 +21,14 @@ extension MainViewController {
     }
     
     func setToolbarConstraints(_ toolbar: UIToolbar) {
-        let margins = self.view.layoutMarginsGuide
         
         self.toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            toolbar.heightAnchor.constraint(equalToConstant: 50),
-            toolbar.leftAnchor.constraint(equalTo: margins.leftAnchor, constant: 0),
-            toolbar.rightAnchor.constraint(equalTo: margins.rightAnchor, constant: 0),
-            toolbar.bottomAnchor.constraint(equalTo: self.pickerView.bottomAnchor, constant: 0)
+            toolbar.height(50),
+            toolbar.leftToSuperview(),
+            toolbar.rightToSuperview(),
+            toolbar.bottomToTop(of: self.pickerView)
         ])
     }
     
@@ -47,7 +46,7 @@ extension MainViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!, constant: 0),
+            segmentedControl.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
             segmentedControl.leftToSuperview(),
             segmentedControl.rightToSuperview()
         ])
@@ -58,8 +57,15 @@ extension MainViewController {
         
         NSLayoutConstraint.activate([
             matchesView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 0),
+            matchesView.height(650),
             matchesView.leftToSuperview(),
             matchesView.rightToSuperview()
         ])
+    }
+    
+    func setPickerConstraints(_ picker: UIDatePicker) {
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        
+        picker.centerInSuperview()
     }
 }
