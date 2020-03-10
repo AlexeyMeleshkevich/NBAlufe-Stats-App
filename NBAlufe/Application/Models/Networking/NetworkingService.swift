@@ -23,7 +23,9 @@ class NetworkingService {
         print(url)
     }
     
-    func requestData(tableView: UITableView) {
+    public func requestData(_ completion: @escaping ([GameModel]?,Error?) -> Void) {
+        
+        
         guard let url = URL(string: self.url) else { return }
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0)
@@ -36,11 +38,12 @@ class NetworkingService {
             do {
                 let json = try JSONDecoder().decode(APIShell.self, from: data)
                 self.matches = json.api.games
-                DispatchQueue.main.async {
-                    tableView.reloadData()
-                }
+                completion(self.matches, error)
                 print(json.api.games[0].vTeam.fullName! + " " + json.api.games[0].hTeam.fullName!)
                 print(json.api.games[0].vTeam.score.points + " vs " + json.api.games[0].hTeam.score.points)
+                
+                print(json.api.games[1].vTeam.fullName! + " " + json.api.games[1].hTeam.fullName!)
+                print(json.api.games[1].vTeam.score.points + " vs " + json.api.games[1].hTeam.score.points)
                 
             } catch let error {
                 print("Error serialization json", error, response ?? "No response")
