@@ -12,10 +12,11 @@ import TinyConstraints
 
 class MainViewController: UIViewController {
     
+    var games = [GameModel]()
+    
     // MARK: UI components
     
-    
-    let matchesView = UITableView()
+    var matchesView = UITableView(frame: CGRect.zero, style: .grouped)
     let segmentedControl = UISegmentedControl(items: Constants.segmentItems)
     let activityIndicator = UIActivityIndicatorView()
     let pickerView = UIView()
@@ -60,13 +61,26 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI(tableView:   matchesView,
-        segmentedControl:  segmentedControl,
-        picker:            picker,
-        activityIndicator: activityIndicator,
-        toolbar:           toolbar)
-        print("223")
-        networker.requestData(tableView: self.matchesView)
+        
+        
+        setUI(tableView: matchesView,
+              segmentedControl: segmentedControl,
+              picker: picker,
+              activityIndicator: activityIndicator,
+              toolbar: toolbar)
+        
+        print("228")
+        
+        networker.requestData {[weak self] (matches, error) in
+            guard let matches = matches else { return }
+            
+            self?.games = matches
+            DispatchQueue.main.async {
+                self?.matchesView.reloadData()
+                //                print("\(self?.games)")
+            }
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +106,12 @@ class MainViewController: UIViewController {
         setActivityIndicator(activity: activityIndicator)
         setPicker(picker: picker)
         setToolbar(toolbar: toolbar)
+        
+        setTableViewConstraints(tableView)
+        setSegmentedControlConstraints(segmentedControl)
+        setPickerViewConstraints(picker)
+        setToolbarConstraints(toolbar)
+        setActivityIndicatorConstraints(activityIndicator)
     }
     
     // MARK: Secondary UI funcs
@@ -107,10 +127,9 @@ class MainViewController: UIViewController {
         self.matchesView.delegate = self
         self.matchesView.dataSource = self
         
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: Constants.matchCellID)
+        tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.matchCellID)
         
         addSubview(tableView)
-        setTableViewConstraints(tableView)
     }
     // MatchesView Header
     private func setHeaderView(tableView: UITableView) {
@@ -126,8 +145,8 @@ class MainViewController: UIViewController {
     }
     // SegmentedControl
     private func setSegmentedControl(segment: UISegmentedControl) {
+        segment.selectedSegmentIndex = 0
         addSubview(segment)
-        setSegmentedControlConstraints(segment)
     }
     // SearchButton
     private func setSearchBarButton() {
@@ -135,18 +154,19 @@ class MainViewController: UIViewController {
     }
     // Date Picker
     private func setPicker(picker: UIDatePicker) {
-        addSubview(picker)
-        setPickerViewConstraints(picker)
-        
-        pickerView.isHidden = true
         pickerView.backgroundColor = .white
         
-        picker.datePickerMode = .time
+        picker.datePickerMode = .date
         picker.setDate(Date(), animated: true)
+        
+        pickerView.addSubview(picker)
+        setPickerConstraints(picker)
+        pickerView.isHidden = true
+        
+        addSubview(pickerView)
     }
     // Toolbar
     private func setToolbar(toolbar: UIToolbar) {
-        toolbar.isHidden = true
         toolbar.barStyle = .black
         toolbar.barTintColor = .blue
         toolbar.tintColor = .white
@@ -154,7 +174,7 @@ class MainViewController: UIViewController {
         embedButtons(toolbar)
         
         addSubview(toolbar)
-        setToolbarConstraints(toolbar)
+        toolbar.isHidden = true
     }
     
     private func embedButtons(_ toolbar: UIToolbar) {
@@ -165,18 +185,17 @@ class MainViewController: UIViewController {
     // Activity Indicator
     private func setActivityIndicator(activity: UIActivityIndicatorView) {
         activity.hidesWhenStopped = true
-        activity.isHidden = true
         
         addSubview(activity)
-        setActivityIndicatorConstraints(activity)
+        activity.isHidden = true
+        
         startActivityIndicator()
     }
     
     // MARK:  Binding cell
     
     public func bindData(cell: CustomTableViewCell, for indexPath: IndexPath) {
-        let match = networker.matches[indexPath.row]
-        
+        let match = self.games[indexPath.row]
         
         if let fullName1 = match.hTeam.fullName, let fullName2 = match.vTeam.fullName {
             cell.firstTeamTitle.text = fullName1
@@ -258,10 +277,6 @@ class MainViewController: UIViewController {
     @objc private func donePressed() {
         self.pickerView.isHidden = true
         self.toolbar.isHidden = true
-    }
-    
-    @IBAction func segmentAction(_ sender: Any) {
-        
     }
 }
 
